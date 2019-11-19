@@ -1,0 +1,4 @@
+﻿  OOMapTemplate.cpp
+D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(21,24): error C3861:  'NULL': identifier not found
+D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(41): message :  see reference to class template instantiation 'MapTemplate<T,U>' being compiled
+D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(21,29): error C3861:  'NULL': identifier not found
