@@ -1,4 +1,4 @@
 ﻿  OOMapTemplate.cpp
-D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(21,24): error C3861:  'NULL': identifier not found
-D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(41): message :  see reference to class template instantiation 'MapTemplate<T,U>' being compiled
-D:\Users\rhendley\source\repos\OOMapTemplate\OOMapTemplate\MapTemplate.h(21,29): error C3861:  'NULL': identifier not found
+D:\Uni Stuff!\3rd Year (AAAAA)\Objected Oriented Methods in Computing\Assignment\OOAssignment\OOMapTemplate\MapTemplate.h(129): warning C4715: 'MapTemplate<int,int>::output': not all control paths return a value
+D:\Uni Stuff!\3rd Year (AAAAA)\Objected Oriented Methods in Computing\Assignment\OOAssignment\OOMapTemplate\MapTemplate.h(129): warning C4715: 'MapTemplate<char,char>::output': not all control paths return a value
+  OOMapTemplate.vcxproj -> D:\Uni Stuff!\3rd Year (AAAAA)\Objected Oriented Methods in Computing\Assignment\OOAssignment\Debug\OOMapTemplate.exe
