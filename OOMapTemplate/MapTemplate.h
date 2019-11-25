@@ -5,13 +5,14 @@ template<class T, class U> class MapTemplate
 {
 	struct keyPair
 	{
-		U key;
-		T data;
+		T key;
+		U data;
 	};
 
 private:
-	keyPair* pairs;
-	int ARR_SIZE;
+	keyPair* pairs; // pointer to an array which is made in the constructor. 
+	int ARR_SIZE; //Maximum size of the array - set in the constructor. Defaults to 1000 if not set by a user. 
+
 public:
 	//pass in the size of the array, otherwise defaults to size 1000
 	MapTemplate(int size = 1000) 
@@ -24,13 +25,11 @@ public:
 		for (int i = 0; i < size; i++)
 		{
 			pairs[i] = { 0,0 };
-			
 		}
-		std::cout << "Made It Out" << std::endl;
 	}
 
 	//cycles through the array until it finds the first 'empty' slot (i.e, key being 0) and puts it there.
-	bool push(U key, T data)
+	bool push(T key, U data)
 	{
 		//though it will reject a key if it's integer 0.
 		if (key == 0)
@@ -42,9 +41,14 @@ public:
 		{
 			for (int i = 0; i < ARR_SIZE; i++)
 			{
-				if (pairs[i].key != 0)
+				if (pairs[i].key == key)
 				{
-					//just continues
+					std::cout << "key already exists.." << std::endl;
+					return false;
+				}
+				else if (pairs[i].key != 0)
+				{
+					//nope
 				}
 				else
 				{
@@ -59,7 +63,7 @@ public:
 	}
 
 	//deletes a specific member by replacing the key and data with 0.
-	void erase(U key)
+	void erase(T key)
 	{
 		for (int i = 0; i < ARR_SIZE; i++)
 		{
@@ -71,7 +75,7 @@ public:
 				return;
 			}
 		}
-		std::cout << "key not found" << std::endl;
+		std::cout << "Erase attempt: Key not found!" << std::endl;
 		return;
 	}
 
@@ -111,7 +115,7 @@ public:
 	}
 
 	//outputs the data attached to a key.
-	U output(U key)
+	U output(T key)
 	{
 		for (int i = 0; i < ARR_SIZE; i++)
 		{
@@ -119,20 +123,23 @@ public:
 			{
 				return pairs[i].data;
 			}
-			else if (pairs[i].key == 0)
+			if (pairs[i].key == 0)
 			{
-				return 0;
+				std::cout << "Output attempt: Key not found!" << std::endl;
+				break;
 			}
 			else
 			{
 				//nowt
 			}
 		}
+		return 0;
 
 	}
 
 	~MapTemplate()
 	{
+		//clears up the dynamically allocated array. 
 		delete pairs;
 	}
 };
