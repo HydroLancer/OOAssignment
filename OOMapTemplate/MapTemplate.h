@@ -11,55 +11,42 @@ template<class T, class U> class MapTemplate
 
 private:
 	keyPair* pairs; // pointer to an array which is made in the constructor. 
+	keyPair* pairs2;
+
 	int ARR_SIZE; //Maximum size of the array - set in the constructor. Defaults to 1000 if not set by a user. 
 
 public:
-	//pass in the size of the array, otherwise defaults to size 1000
-	MapTemplate(int size = 1000) 
+	//takes first key and data pair, constructs new map.
+	MapTemplate(T key, U data) 
 	{
-		ARR_SIZE = size;
-		pairs = new keyPair[size];
-
-		//Fills the array with 0, so when scannng through to find an "empty" slot, first 0 in the key is fine to overwrite
-		//need to work out how to sort this for string.. 
-		for (int i = 0; i < size; i++)
-		{
-			pairs[i] = { 0,0 };
-		}
+		pairs = new keyPair[1];
+		pairs[0].key = key;
+		pairs[0].data = data;
+		ARR_SIZE = 1;
 	}
 
 	//cycles through the array until it finds the first 'empty' slot (i.e, key being 0) and puts it there.
 	bool push(T key, U data)
 	{
-		//though it will reject a key if it's integer 0.
-		if (key == 0)
-		{
-			std::cout << "Rejected" << std::endl;
-			return false;
-		}
-		else
-		{
-			for (int i = 0; i < ARR_SIZE; i++)
-			{
-				if (pairs[i].key == key)
-				{
-					std::cout << "key already exists.." << std::endl;
-					return false;
-				}
-				else if (pairs[i].key != 0)
-				{
-					//nope
-				}
-				else
-				{
-					pairs[i].key = key;
-					pairs[i].data = data;
-					break;
-				}
-			}
-			return true;
-		}
+		ARR_SIZE++;
+		pairs2 = new keyPair[ARR_SIZE];
 
+		//copies the old array over, deletes old array, then switches the new array back to the old pointer.
+		for (int i = 0; i < ARR_SIZE - 1; i++)
+		{
+			pairs2[i].key = pairs[i].key;
+			pairs2[i].data = pairs[i].data;
+		}
+		
+		//deleting the old array after copying, then reassigning the old pointer to the new array before clearing the "new" one, ready for a reinsert
+		delete pairs;
+		pairs = pairs2;
+		delete pairs2;
+
+		//finally inserts the new data
+		pairs[ARR_SIZE - 1].key = key;
+		pairs[ARR_SIZE - 1].data = data;
+		return true;
 	}
 
 	//deletes a specific member by replacing the key and data with 0.
@@ -141,5 +128,6 @@ public:
 	{
 		//clears up the dynamically allocated array. 
 		delete pairs;
+		delete pairs2;
 	}
 };
